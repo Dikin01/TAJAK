@@ -1,12 +1,16 @@
 ﻿namespace Calculator.Objects;
 
-class AnalysisResult
+public class AnalysisResult
 {
-    public List<string> Errors { get; } = new();
-
-    public void Add(AnalysisResult result) => Errors.AddRange(result.Errors);
-
+    private readonly List<string> _errors = new();
+    
     public Status Status => Errors.Any() ? Status.Error : Status.Ok;
+
+    public IReadOnlyCollection<string> Errors => _errors;
+    
+    public void AddError(string errorMessage) => _errors.Add(errorMessage);
+
+    public void CopyErrors(AnalysisResult from) => _errors.AddRange(from.Errors);
 }
 
 public enum Status

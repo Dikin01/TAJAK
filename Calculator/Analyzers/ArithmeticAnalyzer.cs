@@ -3,7 +3,7 @@ using Calculator.Objects;
 
 namespace Calculator.Analyzers;
 
-class ArithmeticAnalyzer : IStringAnalyzer
+public class ArithmeticAnalyzer : IStringAnalyzer
 {
     private readonly IEnumerable<IStringAnalyzer> _analyzers;
 
@@ -15,14 +15,14 @@ class ArithmeticAnalyzer : IStringAnalyzer
         };
     }
 
-    public AnalysisResult GetResult(string expression)
+    public AnalysisResult Analyse(string expression)
     {
         var result = new AnalysisResult();
 
         foreach (var analyzer in _analyzers)
         {
-            var tempResult = analyzer.GetResult(expression);
-            result.Add(tempResult);
+            var tempResult = analyzer.Analyse(expression);
+            result.CopyErrors(tempResult);
         }
 
         return result;
