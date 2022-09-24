@@ -2,7 +2,7 @@
 
 namespace Calculator.Interfaces;
 
-interface IStringAnalyzer
+public interface IStringAnalyzer
 {
-    public AnalysisResult GetResult(string expression);
+    public AnalysisResult Analyse(string expression);
 }
